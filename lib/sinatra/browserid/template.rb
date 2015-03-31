@@ -16,7 +16,7 @@ navigator.id.getVerifiedEmail(function(assertion) {
 }
 </script>
 
-<form name="_browserid_assert" action="/_browserid_assert" method="post">
+<form name="_browserid_assert" action="<%= url '/_browserid_assert' %>" method="post">
 <input type="hidden" name="redirect" value="<%= redirect_url %>">
 <input type="hidden" name="assertion" value="">
 </form>
