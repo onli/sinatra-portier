@@ -13,7 +13,7 @@ module Sinatra
     def self.registered(app)
       app.helpers BrowserID::Helpers
 
-      app.set :browserid_url, "https://browserid.org"
+      app.set :browserid_url, "https://login.persona.org"
       app.set :browserid_login_button, :red
       app.set :browserid_login_url, "/_browserid_login"
 
