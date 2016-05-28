@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "sinatra-browserid"
-  s.version = "0.3.2"
+  s.version = "1.0.0"
 
   s.authors = ["Pete Fritchman"]
   s.email = ["petef@databits.net"]
@@ -13,4 +13,5 @@ Gem::Specification.new do |s|
   s.summary = "Sinatra extension for user authentication with browserid.org"
 
   s.add_dependency("sinatra", ">= 1.1.0")
+  s.add_dependency("json-jwt", ">= 1.5.0")
 end

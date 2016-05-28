@@ -1,8 +1,12 @@
-Sinatra plugin that allows authentication against [BrowserID](https://browserid.org/). BrowserID lets you verify the email identity of a user.
+Sinatra plugin that allows authentication against the letsauth prototype, the successor for [Persona](https://login.persona.org/about). Like Persona, this lets you verify the email identity of a user.
 
-To learn more, see how it works [from a users perspective](https://browserid.org/about) and [from a developers perspective](https://github.com/mozilla/browserid/wiki/How-to-Use-BrowserID-on-Your-Site).
+To be drop-in replacement, the code keeps using the browserid namespace.
 
-Note that BrowserID logins are not done from within a form on your site -- you provide a login button, and that will start up the BrowserID login flow (either via a pop-up or an in-browser widget).
+---
+
+To learn more, [read aboutletsauth](https://github.com/letsauth/letsauth.github.io).
+
+Note that logins are not done from within a form on your site -- you provide a login form, and that will start up the login flow and redirect back to your main page.
 
 How to get started:
 
@@ -13,7 +17,6 @@ require 'sinatra/browserid'
 module MyApp < Sinatra::Base
     register Sinatra::BrowserID
 
-    set :browserid_login_button, :orange
     set :sessions, true
 
     get '/'
@@ -44,16 +47,13 @@ example app, run <tt>rackup -p $PORT</tt> in the example directory.
 
 Available sinatra settings:
 
-* <tt>:browserid_login_button</tt>: set to a color (:orange, :red, :blue,
-  :green, :grey) or an image URL
-* <tt>:browserid_server</tt>: If you're using an alternate auth provider
+ * <tt>:browserid_url</tt>: If you're using an alternate auth provider
   other than https://browserid.org
-* <tt>:browserid_login_url</tt>: URL users get redirected to when the
+ * <tt>:browserid_login_url</tt>: URL users get redirected to when the
   <tt>authorize!</tt> helper is called and a user is not logged in
 
 
-Still TODO:
+TODO:
 
-* better error handling
-* local assertion verification (eliminate callback)
-
+ * better error handling
+ * Signature checking, key caching
