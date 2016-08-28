@@ -42,7 +42,11 @@ module Sinatra
                       id_token["exp"] > Time.now.to_i &&
                       id_token["email_verified"])
                           session[:browserid_email] = id_token["email"]
-                          redirect "/"
+                          if session['redirect_url']
+                            redirect session['redirect_url']
+                          else
+                            redirect "/"
+                          end
                   end
               rescue OpenURI::HTTPError => e
                   puts "could not validate token: " + e.to_s
