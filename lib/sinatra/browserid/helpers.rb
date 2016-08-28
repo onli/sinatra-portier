@@ -38,6 +38,11 @@ module Sinatra
         redirect_url ||= request.url
         session['redirect_url'] = redirect_url
 
+        nonce = session[:nonce]
+        unless nonce
+          session[:nonce] = nonce = SecureRandom.base64
+        end
+
         template = ERB.new(Templates::LOGIN_BUTTON)
         template.result(binding)
       end

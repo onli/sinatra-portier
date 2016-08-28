@@ -40,8 +40,10 @@ module Sinatra
                   if (id_token["iss"] == settings.browserid_url &&
                       id_token["aud"] == request.base_url.chomp('/') &&        
                       id_token["exp"] > Time.now.to_i &&
-                      id_token["email_verified"])
+                      id_token["email_verified"] &&
+                      id_token["nonce"] == session[:nonce])
                           session[:browserid_email] = id_token["email"]
+                          session.delete(:nonce)
                           if session['redirect_url']
                             redirect session['redirect_url']
                           else
