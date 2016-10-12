@@ -15,7 +15,7 @@ module Sinatra
         def self.registered(app)
             app.helpers BrowserID::Helpers
 
-            app.set :browserid_url, "https://laoidc.herokuapp.com"
+            app.set :browserid_url, "https://broker.portier.io"
             app.set :browserid_login_button, :red
             app.set :browserid_login_url, "/_browserid_login"
 
