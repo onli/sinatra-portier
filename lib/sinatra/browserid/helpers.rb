@@ -27,26 +27,21 @@ module Sinatra
         session[:browserid_email]
       end
 
-      # Returns the HTML to render the BrowserID login button.
+      # Returns the HTML to render the Persona login form.
       # Optionally takes a URL parameter for where the user should
-      # be redirected to after the assert POST back.  You can
-      # customize the button image by setting the Sinatra option
-      # <tt>:browserid_login_button</tt> to a color (:orange,
-      # :red, :blue, :green, :grey) or an actual URL.
+      # be redirected to after the assert POST back.
       def render_login_button(redirect_url = nil)
-        case settings.browserid_login_button
-        when :orange, :red, :blue, :green, :grey
-          button_url = "#{settings.browserid_url}/i/sign_in_" \
-                       "#{settings.browserid_login_button.to_s}.png"
-        else
-          button_url = settings.browserid_login_button
-        end
-
         if session[:authorize_redirect_url]
           redirect_url = session[:authorize_redirect_url]
           session[:authorize_redirect_url] = nil
         end
         redirect_url ||= request.url
+        session['redirect_url'] = redirect_url
+
+        nonce = session[:nonce]
+        unless nonce
+          session[:nonce] = nonce = SecureRandom.base64
+        end
 
         template = ERB.new(Templates::LOGIN_BUTTON)
         template.result(binding)
