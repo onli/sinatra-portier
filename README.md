@@ -1,10 +1,10 @@
-Sinatra plugin that allows authentication against the letsauth prototype, the successor for [Persona](https://login.persona.org/about). Like Persona, this lets you verify the email identity of a user.
+Sinatra plugin that allows authentication against portier, the successor for [Persona](https://login.persona.org/about). Like Persona, this lets you verify the email identity of a user.
 
-To be drop-in replacement, the code keeps using the browserid namespace.
+To be a drop-in replacement, the code keeps using the browserid namespace.
 
 ---
 
-To learn more, [read aboutletsauth](https://github.com/letsauth/letsauth.github.io).
+To learn more, [read about portier](https://portier.github.io/).
 
 Note that logins are not done from within a form on your site -- you provide a login form, and that will start up the login flow and redirect back to your main page.
 
@@ -48,12 +48,6 @@ example app, run <tt>rackup -p $PORT</tt> in the example directory.
 Available sinatra settings:
 
  * <tt>:browserid_url</tt>: If you're using an alternate auth provider
-  other than https://browserid.org
+  other than https://broker.portier.io
  * <tt>:browserid_login_url</tt>: URL users get redirected to when the
   <tt>authorize!</tt> helper is called and a user is not logged in
-
-
-TODO:
-
- * better error handling
- * Signature checking, key caching
