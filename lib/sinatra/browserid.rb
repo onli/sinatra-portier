@@ -29,7 +29,7 @@ module Sinatra
               begin
                   # 3. Server checks signature
                   # for that, fetch the public key from the LA instance (TODO: Do that beforehand for trusted instances, and generally cache the key)
-                  public_key_jwks = JSON.parse(URI.parse(URI.escape(settings.browserid_url + '/jwks.json')).read)
+                  public_key_jwks = ::JSON.parse(URI.parse(URI.escape(settings.browserid_url + '/jwks.json')).read)
                   public_key = OpenSSL::PKey::RSA.new
                   public_key.e = OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["e"]), 2 
                   public_key.n = OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["n"]), 2
