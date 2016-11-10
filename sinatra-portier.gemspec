@@ -1,11 +1,13 @@
 Gem::Specification.new do |s|
   s.name = "sinatra-portier"
-  s.version = "1.1.0"
+  s.version = "1.1.2"
 
   s.authors = ["Pete Fritchman", "Malte Paskuda"]
   s.email = ["malte@paskuda.biz"]
   s.files = ["README.md", "lib/sinatra/browserid.rb", "example/app.rb",
-             "example/config.ru", "example/views/index.erb"]
+             "example/config.ru", "example/views/index.erb",
+             "lib/sinatra/browserid/helpers.rb", "lib/sinatra/browserid/template.rb",
+             "lib/sinatra/portier.rb"]
   s.has_rdoc = true
   s.homepage = "https://github.com/onli/sinatra-portier"
   s.rdoc_options = ["--inline-source"]
