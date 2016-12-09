@@ -18,7 +18,9 @@ require 'sinatra/browserid'
 register Sinatra::BrowserID
 
 set :sessions, true
-set :protection, except: [:http_origin] # Needed to make webkit-browsers like Chrome work. Behind a proxy you will also need to disable :remote_token, regardless for which browser.
+# Disabling origin-chek is needed to make webkit-browsers like Chrome work. 
+# Behind a proxy you will also need to disable :remote_token, regardless for which browser.
+set :protection, except: [:http_origin] 
 get '/' do
     if authorized?
         "Welcome, #{authorized_email}"
