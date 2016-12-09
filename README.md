@@ -11,35 +11,34 @@ Note that logins are not done from within a form on your site -- you provide a l
 How to get started:
 
 ```ruby
-require 'sinatra/base'
+require 'sinatra'
 require 'sinatra/browserid'
 
-module MyApp < Sinatra::Base
-    register Sinatra::BrowserID
 
-    set :sessions, true
+register Sinatra::BrowserID
 
-    get '/'
-        if authorized?
-            "Welcome, #{authorized_email}"
-        else
-            render_login_button
-        end
-    end
-
-    get '/secure'
-        authorize!                 # require a user be logged in
-
-        email = authorized_email   # browserid email
-        ...
-    end
-
-    get '/logout'
-        logout!
-
-        redirect '/'
+set :sessions, true
+set :protection, except: [:http_origin] # Needed to make webkit-browsers like Chrome work. Behind a proxy you will also need to disable :remote_token, regardless for which browser.
+get '/' do
+    if authorized?
+        "Welcome, #{authorized_email}"
+    else
+        render_login_button
     end
 end
+
+get '/secure' do
+    authorize!                 # require a user be logged in
+
+    authorized_email   # browserid email
+end
+
+get '/logout' do
+    logout!
+
+    redirect '/'
+end
+
 ```
 
 See the rdoc for more details on the helper functions.  For a functioning
