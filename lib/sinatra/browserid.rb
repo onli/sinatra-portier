@@ -18,6 +18,7 @@ module Sinatra
             app.set :browserid_url, "https://broker.portier.io"
             app.set :browserid_login_button, :red
             app.set :browserid_login_url, "/_browserid_login"
+            app.set :browserid_button_class, ""
 
             app.get '/_browserid_login' do
                 # TODO(petef): render a page that initiates login without
