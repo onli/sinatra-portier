@@ -61,4 +61,4 @@ Available sinatra settings:
   other than https://broker.portier.io
  * <tt>:browserid_login_url</tt>: URL users get redirected to when the
   <tt>authorize!</tt> helper is called and a user is not logged in
- * <tt>:browserid_button_class</tt> css class of the login button
+ * <tt>:browserid_button_class</tt>: css class of the login button
