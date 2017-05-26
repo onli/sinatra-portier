@@ -8,7 +8,16 @@ To learn more, [read about portier](https://portier.github.io/).
 
 Note that logins are not done from within a form on your site -- you provide a login form, and that will start up the login flow and redirect back to your main page.
 
-How to get started:
+## How to get started
+
+Install the gem **sinatra-portier**"
+
+```
+gem install sinatra-portier
+```
+
+The use it in your code:
+ 
 
 ```ruby
 require 'sinatra'
@@ -52,3 +61,4 @@ Available sinatra settings:
   other than https://broker.portier.io
  * <tt>:browserid_login_url</tt>: URL users get redirected to when the
   <tt>authorize!</tt> helper is called and a user is not logged in
+ * <tt>:browserid_button_class</tt> css class of the login button
