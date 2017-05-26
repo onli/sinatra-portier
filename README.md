@@ -10,7 +10,7 @@ Note that logins are not done from within a form on your site -- you provide a l
 
 ## How to get started
 
-Install the gem **sinatra-portier**"
+Install the gem **sinatra-portier**:
 
 ```
 gem install sinatra-portier
