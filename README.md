@@ -16,7 +16,7 @@ Install the gem **sinatra-portier**"
 gem install sinatra-portier
 ```
 
-The use it in your code:
+Then use it in your code:
  
 
 ```ruby
