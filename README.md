@@ -10,7 +10,7 @@ Note that logins are not done from within a form on your site -- you provide a l
 
 ## How to get started
 
-Install the gem **sinatra-portier**"
+Install the gem **sinatra-portier**:
 
 ```
 gem install sinatra-portier
@@ -27,7 +27,7 @@ require 'sinatra/browserid'
 register Sinatra::BrowserID
 
 set :sessions, true
-# Disabling origin-chek is needed to make webkit-browsers like Chrome work. 
+# Disabling origin-check is needed to make webkit-browsers like Chrome work. 
 # Behind a proxy you will also need to disable :remote_token, regardless for which browser.
 set :protection, except: [:http_origin] 
 get '/' do
