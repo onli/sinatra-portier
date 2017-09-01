@@ -16,7 +16,7 @@ Install the gem **sinatra-portier**"
 gem install sinatra-portier
 ```
 
-The use it in your code:
+Then use it in your code:
  
 
 ```ruby
@@ -60,5 +60,5 @@ Available sinatra settings:
  * <tt>:browserid_url</tt>: If you're using an alternate auth provider
   other than https://broker.portier.io
  * <tt>:browserid_login_url</tt>: URL users get redirected to when the
-  <tt>authorize!</tt> helper is called and a user is not logged in
+  <tt>authorize!(redirect: nil)</tt> helper is called and a user is not logged in. `redirect` is an optional parameter to set the redirect target on the function call instead.
  * <tt>:browserid_button_class</tt> css class of the login button

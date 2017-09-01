@@ -10,8 +10,9 @@ module Sinatra
       # If the current user is not logged in, redirects to a login
       # page. Override the login page by setting the Sinatra
       # option <tt>:browserid_login_url</tt>.
-      def authorize!
+      def authorize!(redirect: nil)
         session[:authorize_redirect_url] = request.url
+        session[:authorize_redirect_url] = redirect if redirect
         login_url = settings.browserid_login_url
         redirect login_url unless authorized?
       end
