@@ -61,4 +61,5 @@ Available sinatra settings:
   other than https://broker.portier.io
  * <tt>:browserid_login_url</tt>: URL users get redirected to when the
   <tt>authorize!(redirect: nil)</tt> helper is called and a user is not logged in. `redirect` is an optional parameter to set the redirect target on the function call instead.
- * <tt>:browserid_button_class</tt> css class of the login button
+ * <tt>:browserid_button_class</tt>: Css class of the login button
+ * <tt>:browserid_button_text</tt>: Text of the login button
