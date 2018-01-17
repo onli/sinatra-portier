@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "sinatra-portier"
-  s.version = "1.4.0"
+  s.version = "1.5.0"
 
   s.authors = ["Pete Fritchman", "Malte Paskuda"]
   s.email = ["malte@paskuda.biz"]
@@ -17,4 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency("sinatra", ">= 1.1.0")
   s.add_dependency("jwt", ">= 1.5.4")
   s.add_dependency("url_safe_base64", ">= 0.2.2")
+  s.add_dependency("simpleidn", ">= 0.0.9")
+
+  s.required_ruby_version(">= 2.4.0")
 end

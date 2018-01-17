@@ -4,6 +4,8 @@ require "open-uri"
 require 'json'
 require 'url_safe_base64'
 require 'jwt'
+require 'simpleidn'
+require 'ipaddr'
 require "sinatra/base"
 require 'sinatra/browserid/helpers'
 require 'sinatra/browserid/template'
@@ -44,7 +46,7 @@ module Sinatra
                       id_token["exp"] > Time.now.to_i &&
                       id_token["email_verified"] &&
                       id_token["nonce"] == session[:nonce])
-                          session[:browserid_email] = id_token["email"]
+                          session[:browserid_email] = id_token['sub']
                           session.delete(:nonce)
                           if session['redirect_url']
                             redirect session['redirect_url']

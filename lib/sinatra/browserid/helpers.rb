@@ -28,6 +28,28 @@ module Sinatra
         session[:browserid_email]
       end
 
+      # Normalize the email like the broker will do it, see
+      # https://github.com/portier/portier.github.io/blob/master/specs/Email-Normalization.md
+      def normalize_email(email)
+        begin
+            user, domain = email.split("@")
+            if user == nil or user.empty?
+                raise ArgumentError.new('user part must not be empty')  
+            end 
+            user = user.downcase
+            domain = SimpleIDN.to_ascii(domain).downcase
+            begin
+                IPAddr.new(domain)
+            rescue
+                # if domain could not be parsed as IP we are good
+                return user + "@" + domain
+            end
+            raise ArgumentError.new('domain must not be an IP')  
+        rescue Exception => e
+            raise ArgumentError, 'Not a valid email adress: ' + e.message
+        end
+      end
+
       # Returns the HTML to render the Persona login form.
       # Optionally takes a URL parameter for where the user should
       # be redirected to after the assert POST back.
