@@ -19,5 +19,4 @@ Gem::Specification.new do |s|
   s.add_dependency("url_safe_base64", ">= 0.2.2")
   s.add_dependency("simpleidn", ">= 0.0.9")
 
-  s.required_ruby_version(">= 2.4.0")
 end
