@@ -35,8 +35,16 @@ module Sinatra
                   # for that, fetch the public key from the LA instance (TODO: Do that beforehand for trusted instances, and generally cache the key)
                   public_key_jwks = ::JSON.parse(URI.parse(URI.escape(settings.browserid_url + '/keys.json')).read)
                   public_key = OpenSSL::PKey::RSA.new
-                  public_key.e = OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["e"]), 2 
-                  public_key.n = OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["n"]), 2
+                  if public_key.respond_to? :set_key
+                    # set n and d via the new set_key function, as direct access to n and e is blocked for some ruby and openssl versions.
+                    # Note that we have no d, as this is a public key, which would be the third param
+                    public_key.set_key( (OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["n"]), 2),
+                                        (OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["e"]), 2),
+                                        nil)
+                  else
+                    public_key.e = OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["e"]), 2 
+                    public_key.n = OpenSSL::BN.new UrlSafeBase64.decode64(public_key_jwks["keys"][0]["n"]), 2
+                  end
                   
                   id_token = JWT.decode params[:id_token], public_key, true, { :algorithm => 'RS256' }
                   id_token = id_token[0]
