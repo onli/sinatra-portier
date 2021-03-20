@@ -1,28 +1,29 @@
-#!/usr/bin/env ruby
+require 'sinatra'
+require 'sinatra/browserid'
 
-$: << File.join(File.dirname(__FILE__), "..", "lib")
 
-require "sinatra/base"
-require "sinatra/browserid"
+register Sinatra::BrowserID
 
-class TestApp < Sinatra::Base
-  register Sinatra::BrowserID
+set :sessions, true
+# Disabling origin-check is needed to make webkit-browsers like Chrome work. 
+# Behind a proxy you will also need to disable :remote_token, regardless for which browser.
+set :protection, except: [:http_origin] 
+get '/' do
+    if authorized?
+        "Welcome, #{authorized_email}"
+    else
+        render_login_button
+    end
+end
 
-  set :sessions, true
+get '/secure' do
+    authorize!                 # require a user be logged in
 
-  get '/' do
-    erb :index
-  end
+    authorized_email   # browserid email
+end
 
-  get '/logout' do
+get '/logout' do
     logout!
 
     redirect '/'
-  end
-
-  get '/confidential' do
-    authorize!
-
-    "Hey #{authorized_email}, you're authorized!"
-  end
 end

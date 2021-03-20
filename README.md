@@ -53,7 +53,13 @@ end
 ```
 
 See the rdoc for more details on the helper functions.  For a functioning
-example app, run <tt>rackup -p $PORT</tt> in the example directory.
+example app, start the app in the example directory:
+
+```
+bundle install
+bundle exec rackup -p PORT
+
+```
 
 Available sinatra settings:
 
